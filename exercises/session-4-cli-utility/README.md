@@ -1,7 +1,12 @@
-> **[Needs Tech Review]** — IFTA domain rules are illustrative placeholders. Augustus
-> will verify before the live session.
+> **Self-study take-home reference.** This CLI exercise is a worked greenfield
+> full-SDLC example — requirements through packaging — for you to explore at your
+> own pace. It is not part of the in-class session. Work through as much or as
+> little as is useful to you.
 
-# IFTA Fuel-Tax Calculator — Hour 7 Exercise
+> **[Needs Tech Review]** — IFTA domain rules are illustrative placeholders. Augustus
+> will verify before distribution.
+
+# IFTA Fuel-Tax Calculator — Self-Study Reference
 
 Build a command-line tool that computes IFTA fuel-tax apportionment from a CSV of
 trip mileage records. Full requirements are in [SPEC.md](SPEC.md).

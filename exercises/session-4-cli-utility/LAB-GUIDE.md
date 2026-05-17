@@ -1,10 +1,16 @@
-# D6 — Lab Guide: Build the IFTA CLI Utility
+# Lab Guide: Build the IFTA CLI Utility
 
-iGEN Developer AI Training · Session 4 (Hour 7)
+iGEN Developer AI Training · Self-Study Take-Home Reference
+
+> **Self-study take-home reference.** This guide walks through a complete greenfield
+> SDLC pass — requirements, tests, implementation, packaging — using the IFTA
+> calculator as the worked example. It is designed for self-paced exploration after
+> the course, not for use during Session 4. Work through it at whatever depth is
+> useful to you.
 
 > **[Needs Tech Review]** — IFTA domain rules, tax rates, and the expected output
 > values in this guide depend on placeholder rates in `jurisdictions.py`. Augustus
-> will verify the rates and the corresponding expected output before the live session.
+> will verify the rates and the corresponding expected output before distribution.
 > Claude Code version references should be confirmed against the locked demo environment.
 
 ---

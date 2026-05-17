@@ -65,4 +65,17 @@ We'll look at a few in class. Bring the real ones, not polished versions — the
 
 ---
 
-*Reference handouts: **C2** (CLAUDE.md template), **C3** (SKILL.md template). Questions? Session 4 opens with a review.*
+## Reflection — Bring These to Session 4
+
+After the session, write short answers to these four prompts:
+
+1. **How well did the AI draft the documents?** Where did it capture the task accurately, and where did you have to correct it?
+2. **How did writing the anti-goals section feel?** Did articulating the boundaries surface anything you hadn't made explicit before?
+3. **How did your corrections and guidance change what the AI produced?** Would the output have been usable without your input?
+4. **One failure or frustration** — a moment where the AI missed something obvious, got a detail wrong, or required more back-and-forth than you expected.
+
+Keep each answer to two or three sentences. We'll hear from a few people at the start of Session 4.
+
+---
+
+*Reference handouts: **C2** (CLAUDE.md template), **C3** (SKILL.md template). Questions? Session 4 opens with the share-back.*

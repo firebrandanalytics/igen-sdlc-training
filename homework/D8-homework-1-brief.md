@@ -41,7 +41,7 @@ Keep each bullet to two or three sentences. You are not writing an essay — you
 
 ## What to Bring to Session 3
 
-Your three bullets. We'll surface a few in class.
+Your three bullets. We'll surface a few at the start of Session 3 — 2–3 people will share briefly and we'll use them to open the session.
 
 You don't need to prepare slides or a write-up. Just bring the bullets — and if you hit something interesting, be ready to describe what happened in two minutes.
 
