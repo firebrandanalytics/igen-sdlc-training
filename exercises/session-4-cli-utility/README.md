@@ -20,8 +20,7 @@ trip mileage records. Full requirements are in [SPEC.md](SPEC.md).
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
-pip install -e .
-ifta-calc --csv sample_data\trips.csv --mpg 6.5
+pip install -e ".[dev]"
 ```
 
 ### macOS / Linux
@@ -29,7 +28,13 @@ ifta-calc --csv sample_data\trips.csv --mpg 6.5
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e ".[dev]"
+```
+
+`cli.py` is a stub — it raises `NotImplementedError` until you implement it. Once
+you have built the calculator, verify it with:
+
+```bash
 ifta-calc --csv sample_data/trips.csv --mpg 6.5
 ```
 

@@ -38,7 +38,7 @@ reviewing.
 | `ifta_calculator/cli.py` | Stub only — `NotImplementedError` |
 | `tests/test_calculator.py` | One failing test (AC-1) |
 | `sample_data/trips.csv` | 12-row sample — ready to use |
-| `pyproject.toml` | Configured — `pip install -e .` already set up |
+| `pyproject.toml` | Configured — `pip install -e ".[dev]"` already set up |
 
 ---
 
@@ -52,7 +52,7 @@ Do this once, before any Claude Code sessions.
 cd exercises/session-4-cli-utility
 python -m venv .venv
 source .venv/Scripts/activate
-pip install -e .
+pip install -e ".[dev]"
 ```
 
 ### macOS / Linux
@@ -61,10 +61,10 @@ pip install -e .
 cd exercises/session-4-cli-utility
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e ".[dev]"
 ```
 
-After `pip install -e .`, the `ifta-calc` command is available inside the virtual
+After `pip install -e ".[dev]"`, the `ifta-calc` command is available inside the virtual
 environment. You don't need to reinstall it as you edit the source — that's what
 `-e` (editable mode) does.
 
@@ -206,7 +206,7 @@ row should all be present.
 > install picks up changes automatically, but Python's import cache can sometimes
 > lag. Try:
 > ```bash
-> pip install -e . --force-reinstall
+> pip install -e ".[dev]" --force-reinstall
 > ```
 
 > **If the table alignment is off:** ask Claude Code to use f-string format
@@ -243,7 +243,7 @@ All tests should pass. If any fail, read the failure message and direct Claude C
 to fix the specific issue.
 
 > **If tests pass in isolation but fail together:** check whether the test file
-> imports are correct. The package must be installed (`pip install -e .`) for
+> imports are correct. The package must be installed (`pip install -e ".[dev]"`) for
 > `from ifta_calculator.calculator import calculate` to work.
 
 **Checkpoint 4 passed** when `pytest -v` reports no failures.
@@ -294,8 +294,8 @@ Before moving to Hour 8, take two minutes to note:
 | Symptom | Likely cause | Fix |
 |---------|-------------|-----|
 | `ifta-calc: command not found` | venv not activated | `source .venv/Scripts/activate` (Windows) or `source .venv/bin/activate` (macOS/Linux) |
-| `ModuleNotFoundError: ifta_calculator` | Not installed in editable mode | `pip install -e .` |
-| `pytest` not found | venv not activated, or pytest not installed | Activate venv; run `pip install -e .` |
+| `ModuleNotFoundError: ifta_calculator` | Not installed in editable mode | `pip install -e ".[dev]"` |
+| `pytest` not found | venv not activated, or pytest not installed | Activate venv; run `pip install -e ".[dev]"` |
 | AC-1 tax_owed wrong | Rounding applied to intermediate value | Tax formula: `round(fuel_used * rate, 2)` — do not round `fuel_used` first |
 | Unknown jurisdiction error | A jurisdiction code in the CSV is not in `jurisdictions.py` | Check `sample_data/trips.csv` — all codes must be in the rate table |
 | Output columns misaligned | f-string width not set | Point Claude Code to the example output in `SPEC.md` |

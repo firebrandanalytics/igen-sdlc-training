@@ -12,7 +12,7 @@ iGEN developers — five two-hour sessions on agentic development with Claude Co
   Each has its own `README.md` and `LAB-GUIDE.md`.
 - **`handouts/`** — one-page reference cards: CLAUDE.md and SKILL.md templates,
   cheat sheets, checklists, and a Claude Code commands card.
-- **`homework/`** — the two take-home assignments.
+- **`homework/`** — three take-home assignments: HW1 (D8) operate Claude Code on a real task; HW2 (D9) write a CLAUDE.md and SKILL.md; HW3 (D10) run the Hour 7 comprehension methodology on your own code.
 
 ## Using this repo
 

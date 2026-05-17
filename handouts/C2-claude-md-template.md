@@ -61,6 +61,8 @@ Copy this into a new repo and fill in each section. Delete sections that genuine
 
 Below is a filled-in `CLAUDE.md` for the mileage-logbook web app used in Hours 6–9. Margin notes explain *why* each section is written the way it is.
 
+> **Note:** This example describes the logbook in its **fully-built state** — after all features (F2–F8) have been added. It includes files like `service.py` and `.claude/skills/add-jurisdiction/` that do not exist in the starter. When writing a `CLAUDE.md` for an app at an earlier stage (for example, the Hour 8 warm-up where you write one for the starter), describe only the files that actually exist at that point — omit references to anything not yet built.
+
 ---
 
 ```markdown

@@ -9,6 +9,9 @@ description = "IFTA fuel-tax apportionment calculator (Hour 7 exercise)"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+dev = ["pytest"]
+
 [project.scripts]
 ifta-calc = "ifta_calculator.cli:main"
 

@@ -126,7 +126,7 @@ tests/
     test_calculator.py   # AC-1 failing test — make it pass, then add the rest
 sample_data/
     trips.csv            # sample input
-pyproject.toml           # already configured — pip install -e .
+pyproject.toml           # already configured — pip install -e ".[dev]"
 SPEC.md                  # this file
 ```
 
@@ -138,7 +138,7 @@ SPEC.md                  # this file
 2. Implement `calculate()` — make the provided AC-1 test pass.
 3. Add tests for AC-2 through AC-7.
 4. Implement `main()` in `cli.py` — wire loader + calculator + print table.
-5. Install and test the CLI: `pip install -e .` then `ifta-calc --csv sample_data/trips.csv`.
+5. Install and test the CLI: `pip install -e ".[dev]"` then `ifta-calc --csv sample_data/trips.csv`.
 
 ---
 

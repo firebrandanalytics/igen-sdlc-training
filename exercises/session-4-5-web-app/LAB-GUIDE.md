@@ -213,8 +213,11 @@ confirm the state miles are pre-filled.
 **Goal:** `GET /apportionment` shows a page summarising total miles per jurisdiction
 across all trips, with each jurisdiction's percentage of total miles.
 
-**What this teaches:** this is the feature specced during Hour 6. You are now
-building it. The test plan from Hour 6 becomes the acceptance criteria here.
+**What this teaches:** test-plan-first in practice. Hour 6 demonstrated the
+front-half SDLC methodology (vague ask → sharpened requirements → test plan)
+using the "flag suspicious trips" vague ask as the exercise vehicle; F5 is the
+feature that methodology was building toward. The spec and test plan produced in
+the Hour 6 instructor demo become the acceptance criteria you build against here.
 
 **Direct Claude Code to:**
 - Create `service.py` with a `get_apportionment_summary(conn)` function that

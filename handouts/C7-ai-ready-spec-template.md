@@ -99,21 +99,21 @@ Vague prompts produce confident but wrong output. The agent doesn't have your in
 > Add a way to flag suspicious trips.
 
 **After (AI-ready):**
-> **Task:** Add a `suspicious` boolean flag to the Trip record. A trip is suspicious if its miles-per-day exceeds 800 or if the start and end locations are identical.
+> **Task:** Add a `suspicious` boolean column to the `trips` table. A trip is suspicious if its miles exceed 800 or if `start_location` equals `end_location`. Flag it on creation; surface it in the trips list.
 >
-> **Context:** Trip data lives in `app/models.py` (dataclass) and the `trips` SQLite table (see `app/db.py`). Miles per day = miles / (end_date - start_date).days, where that difference is > 0.
+> **Context:** Trip data lives in the `trips` SQLite table (see `db.py`). The schema has `trip_date`, `start_location`, `end_location`, and `miles`. The app is server-rendered (Jinja2); there is no JSON API.
 >
-> **Constraints:** No new dependencies. Must work with the existing SQLite schema via a migration script in `scripts/`.
+> **Constraints:** No new dependencies. Add the column via `ALTER TABLE` in `db.init_db()`; do not drop and recreate the table.
 >
-> **Anti-Goals:** Don't build a UI for managing flags — the flag is read-only via the list endpoint.
+> **Anti-Goals:** Don't build a filter UI for hiding suspicious trips — that is out of scope for this version.
 >
 > **Acceptance Criteria:**
-> - `GET /trips` includes `"suspicious": true/false` for each trip.
-> - A trip with 1200 miles in one day is flagged.
-> - A trip where start == end is flagged.
-> - A trip with 400 miles in one day is not flagged.
+> - A trip with more than 800 miles is marked suspicious in the database.
+> - A trip where `start_location == end_location` is marked suspicious.
+> - A trip with 400 miles and distinct locations is not marked suspicious.
+> - The trips list page shows a visual indicator (e.g. a flag) for suspicious trips.
 > - `pytest tests/` passes.
 >
-> **Files to Read First:** `app/models.py`, `app/db.py`, `app/routes/trips.py`, `app/services/trip_service.py`
+> **Files to Read First:** `main.py`, `db.py`, `templates/trips_list.html`, `tests/conftest.py`
 >
 > **Definition of Done:** Acceptance criteria pass; change committed on a feature branch; I've reviewed the diff.
