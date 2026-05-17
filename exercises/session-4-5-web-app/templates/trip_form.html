@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Add Trip — Mileage Logbook{% endblock %}
+
+{% block content %}
+<h1>Add Trip</h1>
+
+{% if errors %}
+<div class="errors">
+    <ul>
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="/trips">
+    <div class="field">
+        <label for="trip_date">Date</label>
+        <input
+            type="date"
+            id="trip_date"
+            name="trip_date"
+            value="{{ values.trip_date if values else '' }}"
+            required
+        />
+    </div>
+
+    <div class="field">
+        <label for="vehicle">Vehicle</label>
+        <input
+            type="text"
+            id="vehicle"
+            name="vehicle"
+            placeholder="e.g. TX-4801"
+            value="{{ values.vehicle if values else '' }}"
+            required
+        />
+    </div>
+
+    <div class="field">
+        <label for="start_location">Start Location</label>
+        <input
+            type="text"
+            id="start_location"
+            name="start_location"
+            placeholder="e.g. San Antonio, TX"
+            value="{{ values.start_location if values else '' }}"
+            required
+        />
+    </div>
+
+    <div class="field">
+        <label for="end_location">End Location</label>
+        <input
+            type="text"
+            id="end_location"
+            name="end_location"
+            placeholder="e.g. Houston, TX"
+            value="{{ values.end_location if values else '' }}"
+            required
+        />
+    </div>
+
+    <div class="field">
+        <label for="miles">Miles</label>
+        <input
+            type="number"
+            id="miles"
+            name="miles"
+            step="0.1"
+            min="0.1"
+            placeholder="e.g. 197.3"
+            value="{{ values.miles if values else '' }}"
+            required
+        />
+    </div>
+
+    <div class="actions">
+        <button type="submit">Save Trip</button>
+        <a href="/">Cancel</a>
+    </div>
+</form>
+{% endblock %}
