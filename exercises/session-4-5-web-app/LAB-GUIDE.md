@@ -21,6 +21,9 @@ data model, project layout, and how to run the existing tests.
 
 **Time:** approximately 50 minutes per hour block (Hour 8 / Hour 9).
 
+Hour 8 builds the backend features (F2–F4). Hour 9 builds the frontend pages,
+expands the tests, and deploys (F5–F8).
+
 ---
 
 ## Environment Setup
@@ -77,7 +80,7 @@ claims to. These are the things the C10 rubric is for.
 
 ---
 
-## HOUR 8 — Backend: F2 through F7
+## HOUR 8 — Backend: F2 through F4
 
 ---
 
@@ -105,7 +108,7 @@ guesses at your conventions and one that follows them consistently.
 
 **What this teaches:** a complete vertical slice — data layer helper, route, and
 template change — directed as a single Claude Code task. This is the pattern you
-will repeat for F3 through F7.
+will repeat for F3 and F4.
 
 **Direct Claude Code to:**
 - Add `delete_trip(conn, trip_id)` to `db.py`
@@ -208,6 +211,26 @@ confirm the state miles are pre-filled.
 
 ---
 
+### Hour 8 Complete — End-State Check
+
+```bash
+pytest -v
+```
+
+Expected: all tests pass. Then verify in the browser:
+
+- [ ] Delete button removes a trip from the list
+- [ ] Edit form pre-fills the existing data and saves changes
+- [ ] A trip can record miles for individual states, saved and shown again on edit
+
+If any of these are missing, do not move to Hour 9.
+
+---
+
+## HOUR 9 — Frontend, Tests, and Deployment: F5 through F8
+
+---
+
 ### F5 — IFTA Apportionment Summary Page
 
 **Goal:** `GET /apportionment` shows a page summarising total miles per jurisdiction
@@ -244,7 +267,7 @@ show a helpful message rather than a crash.
 > (`100 - sum_of_other_rows`) to avoid floating-point drift. Ask Claude Code to
 > implement this "give the last row the remainder" pattern.
 
-**Checkpoint H8-4:** `pytest -v` passes; `/apportionment` shows a summary table.
+**Checkpoint H9-1:** `pytest -v` passes; `/apportionment` shows a summary table.
 
 ---
 
@@ -275,7 +298,7 @@ pytest -v
 > URL that flips the current `order` value. Ask Claude Code to show you how it
 > generates those links.
 
-**Checkpoint H8-5:** `pytest -v` passes; dashboard sorts by each column.
+**Checkpoint H9-2:** `pytest -v` passes; dashboard sorts by each column.
 
 ---
 
@@ -307,38 +330,17 @@ pytest -v
 # Then visit /apportionment — TX should now show a tax rate in its row
 ```
 
-**Checkpoint H8-6:** `pytest -v` passes; rates can be added and updated; the skill
+**Checkpoint H9-3:** `pytest -v` passes; rates can be added and updated; the skill
 file exists at `.claude/skills/add-jurisdiction/SKILL.md`.
-
----
-
-### Hour 8 Complete — End-State Check
-
-```bash
-pytest -v
-```
-
-Expected: all tests pass. Then verify in the browser:
-
-- [ ] Delete button removes a trip from the list
-- [ ] Edit form pre-fills the existing data and saves changes
-- [ ] `/apportionment` shows jurisdiction totals and percentages
-- [ ] `/dashboard` is sortable by column
-- [ ] `/jurisdictions` lists rates and accepts new ones
-
-If any of these are missing, do not move to Hour 9.
-
----
-
-## HOUR 9 — Frontend, Tests, and Deployment: F8
 
 ---
 
 ### Test Suite Expansion
 
-Before adding the final features, spend 10 minutes expanding the test suite to
-cover any behaviour that is not yet tested. Use `tests/test_service.py` for service
-layer tests and `tests/test_routes.py` for HTTP-level tests.
+With the feature pages built, and before you containerise the app, spend 10 minutes
+expanding the test suite to cover any behaviour that is not yet tested. Use
+`tests/test_service.py` for service layer tests and `tests/test_routes.py` for
+HTTP-level tests.
 
 Things that are commonly undertested at this point:
 
@@ -355,7 +357,7 @@ test files alongside the service functions, then fill them.
 pytest -v
 ```
 
-**Checkpoint H9-1:** all new tests pass alongside the existing ones.
+**Checkpoint H9-4:** all new tests pass alongside the existing ones.
 
 ---
 
@@ -435,7 +437,7 @@ clarification.
 > is `httpx` not being in `requirements.txt`. The TestClient requires it. Add it,
 > rebuild, and re-run.
 
-**Checkpoint H9-2:** `docker build` succeeds; HTTP health check returns 200;
+**Checkpoint H9-5:** `docker build` succeeds; HTTP health check returns 200;
 Claude Code executes the runbook without needing to deviate from its steps.
 
 ---
