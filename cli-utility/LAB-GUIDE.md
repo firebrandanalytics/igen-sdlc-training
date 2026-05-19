@@ -49,7 +49,7 @@ Do this once, before any Claude Code sessions.
 ### Windows (Git Bash)
 
 ```bash
-cd exercises/session-4-cli-utility
+cd cli-utility
 python -m venv .venv
 source .venv/Scripts/activate
 pip install -e ".[dev]"
@@ -58,7 +58,7 @@ pip install -e ".[dev]"
 ### macOS / Linux
 
 ```bash
-cd exercises/session-4-cli-utility
+cd cli-utility
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
@@ -81,7 +81,7 @@ is not activated — activate it and try again.
 
 ## How to Work Through This Lab
 
-Open a Claude Code session **in the `session-4-cli-utility/` directory**. Keep
+Open a Claude Code session **in the `cli-utility/` directory**. Keep
 `SPEC.md` open in a separate window for reference.
 
 The steps below tell you what to direct Claude Code to do at each stage. They do

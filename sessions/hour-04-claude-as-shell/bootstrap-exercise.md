@@ -1,4 +1,4 @@
-# D3 — In-Class Exercise: Bootstrap a Python Project Through Claude Code
+# In-Class Exercise: Bootstrap a Python Project Through Claude Code
 
 iGEN Developer AI Training · Session 2 (Hour 4)
 

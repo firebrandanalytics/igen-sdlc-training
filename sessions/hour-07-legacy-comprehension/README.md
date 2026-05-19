@@ -15,6 +15,8 @@ to change it safely. The lab guide walks you through that process.
 | `bounded_cache.py` | The mystery code. A ~150-line cache decorator. |
 | `LAB-GUIDE.md` | Step-by-step instructions for Hour 7. Start here. |
 | `README.md` | This file. |
+| `C7-ai-ready-spec-template.md` | AI-ready spec template handout. |
+| `C10-what-good-looks-like-review-rubric.md` | Review rubric for AI-generated code. |
 
 There is no test suite — writing one is part of the lab.
 
@@ -49,3 +51,10 @@ of the file.
 
 Do not read the lab guide before the session. Part of the exercise is
 approaching the code cold, the way you would in a real handoff.
+
+---
+
+## Homework
+
+Homework #3 is assigned after this hour — run the comprehension methodology on a
+piece of your own code. See `../../homework/homework-3-brief.md`.

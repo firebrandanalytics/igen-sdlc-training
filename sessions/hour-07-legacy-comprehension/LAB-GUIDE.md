@@ -1,4 +1,4 @@
-# D6 — Lab Guide: Legacy-Code Comprehension
+# Lab Guide: Legacy-Code Comprehension
 
 iGEN Developer AI Training · Session 4 (Hour 7)
 
@@ -30,14 +30,14 @@ only. Confirm it runs before you do anything else.
 ### Windows (Git Bash or PowerShell)
 
 ```bash
-cd exercises/session-4-legacy-comprehension
+cd sessions/hour-07-legacy-comprehension
 python bounded_cache.py
 ```
 
 ### macOS / Linux
 
 ```bash
-cd exercises/session-4-legacy-comprehension
+cd sessions/hour-07-legacy-comprehension
 python3 bounded_cache.py
 ```
 
@@ -271,7 +271,7 @@ a safer change.
 | Symptom | Likely cause | Fix |
 |---------|-------------|-----|
 | `python bounded_cache.py` exits immediately with no output | Wrong Python version (needs 3.8+) | `python --version` to check; use `python3` on macOS/Linux |
-| `ModuleNotFoundError: No module named 'bounded_cache'` | Running pytest from the wrong directory | `cd` into `session-4-legacy-comprehension/` first |
+| `ModuleNotFoundError: No module named 'bounded_cache'` | Running pytest from the wrong directory | `cd` into `sessions/hour-07-legacy-comprehension/` first |
 | `ModuleNotFoundError: No module named 'pytest'` | pytest not installed | `pip install pytest` |
 | A test you wrote fails when you didn't expect it to | Your understanding of the code may be wrong | Re-read the relevant section of the module; ask Claude Code what the test result is actually telling you |
 | Claude Code produces a very long intent analysis | Normal — it's thorough | Focus on the decisions that map to your preserve-list; skip the minor style observations |

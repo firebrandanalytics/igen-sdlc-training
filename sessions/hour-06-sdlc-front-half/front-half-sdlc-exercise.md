@@ -1,4 +1,4 @@
-# D5 — In-Class Exercise: Front-Half SDLC Pass on the Web App
+# In-Class Exercise: Front-Half SDLC Pass on the Web App
 
 iGEN Developer AI Training · Session 3 (Hour 6)
 
@@ -35,7 +35,7 @@ That is the complete ask. No ticket, no acceptance criteria, no definition of
 
 ## Your Task
 
-Open a Claude Code session in the `exercises/session-4-5-web-app/` directory
+Open a Claude Code session in the `sessions/hour-08-web-app-backend/` directory
 (the Mileage Logbook starter you will build in Hours 8–9). Use Claude Code to help
 you sharpen this ask into structured SDLC artifacts.
 
@@ -61,8 +61,9 @@ them in the next step.
 
 ### Step 2 — Write a sharpened requirements document (10 minutes)
 
-Using the C7 AI-ready spec template (handout or `handouts/C7-ai-ready-spec-template.md`),
-fill in the following sections for the "flag suspicious trips" feature:
+Using the C7 AI-ready spec template (`C7-ai-ready-spec-template.md` in this folder,
+or your printed copy), fill in the following sections for the "flag suspicious
+trips" feature:
 
 **Task** — Be concrete. What exactly will be built? Where does the flag live in the
 data model? How does it appear to users?

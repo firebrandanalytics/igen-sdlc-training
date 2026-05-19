@@ -1,237 +1,71 @@
-# D7 — Lab Guide: Extend the Mileage Logbook Web App
+# Lab Guide: Mileage Logbook — Hour 9 (Frontend, Tests, Deployment)
 
-iGEN Developer AI Training · Sessions 4 & 5 (Hours 8 and 9)
+iGEN Developer AI Training · Hour 9
 
 > **[Needs Tech Review]** — Docker commands (F8), pytest patterns, and FastAPI
 > version-specific behaviour should be verified against the distributed environment
-> before this sheet is used live. Claude Code command references should be confirmed
-> against the locked demo environment. IFTA apportionment logic in F5 uses
-> illustrative rates — verify with Augustus before the live session.
+> before this sheet is used live. IFTA apportionment logic in F5 uses illustrative
+> rates — verify with Augustus before the live session. Claude Code command
+> references should be confirmed against the locked demo environment.
 
 ---
 
 ## What You Are Building
 
-You are extending the Mileage Logbook starter — a minimal FastAPI + SQLite + Jinja2
-app that can already list and create trips. Over Hours 8 and 9 you will add seven
-features (F2–F8) by directing Claude Code through a structured build.
+Hour 9 finishes the Mileage Logbook. You continue the **same app you built in
+Hour 8** — adding features F5–F8: an IFTA apportionment summary page, a sortable
+dashboard, a jurisdiction rate table, and containerisation with a runbook.
 
-Read the starter app's `README.md` before you do anything else. It describes the
-data model, project layout, and how to run the existing tests.
+**The app is in `../hour-08-web-app-backend/`.** You are not starting fresh — keep
+working in that folder, with the code, database, and CLAUDE.md you produced in
+Hour 8.
 
-**Time:** approximately 50 minutes per hour block (Hour 8 / Hour 9).
-
-Hour 8 builds the backend features (F2–F4). Hour 9 builds the frontend pages,
-expands the tests, and deploys (F5–F8).
+**Time:** approximately 50 minutes.
 
 ---
 
-## Environment Setup
+## Environment
 
-Do this once, before any Claude Code sessions.
+You set this app up in Hour 8. Reactivate the virtual environment and confirm the
+app still runs. Run from the repo root.
 
 ### Windows (Git Bash)
 
 ```bash
-cd exercises/session-4-5-web-app
-python -m venv venv
+cd sessions/hour-08-web-app-backend
 source venv/Scripts/activate
-pip install -r requirements.txt
-python seed.py
 uvicorn main:app --reload
 ```
 
 ### macOS / Linux
 
 ```bash
-cd exercises/session-4-5-web-app
-python3 -m venv venv
+cd sessions/hour-08-web-app-backend
 source venv/bin/activate
-pip install -r requirements.txt
-python seed.py
 uvicorn main:app --reload
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) and confirm you see a table of
-trips. The app starts with no CLAUDE.md — you will write one as part of the
-exercise.
-
-**Verify the starter tests pass before you add anything:**
+Confirm [http://127.0.0.1:8000](http://127.0.0.1:8000) still shows the trips list
+with the Delete and Edit features from Hour 8, then check the tests are green:
 
 ```bash
 pytest -v
 ```
 
-Expected: 4 tests pass, 0 failures. If any fail, the environment is not set up
-correctly — do not proceed until they pass.
+If you did not finish Hour 8 (F2–F4), do that first — F5 depends on the
+`trip_jurisdictions` table added in F4.
 
 ---
 
 ## A Note on Approach
 
 Each feature below is a vertical slice: route, data layer, template, tests. Direct
-Claude Code to handle the whole slice at once — this is the agentic loop in
-practice, not tab-completing one file at a time.
-
-**The review discipline:** before each `pytest` run, read the diff. Claude Code
-occasionally adds an import it doesn't need, renames something that was already
-named consistently, or writes a test that doesn't actually exercise the code path it
-claims to. These are the things the C10 rubric is for.
+Claude Code to handle the whole slice at once. Before each `pytest` run, read the
+diff — that review discipline is what the C10 rubric is for.
 
 ---
 
-## HOUR 8 — Backend: F2 through F4
-
----
-
-### Warm-Up — Write a CLAUDE.md
-
-Before directing Claude Code to write any feature code, give it the context it
-needs to operate in this project. Open a Claude Code session in the
-`session-4-5-web-app/` directory and ask it to write a `CLAUDE.md` that covers:
-
-- Project purpose and stack (FastAPI, SQLite, Jinja2, Python 3.11+)
-- The existing module layout (main.py, db.py, seed.py, templates/, tests/)
-- Testing convention (pytest; `client` fixture in `tests/conftest.py` provides a
-  TestClient backed by a temp database; do not use the live `logbook.db`)
-- Style conventions you care about (e.g. "query logic lives in db.py, not in route
-  handlers")
-
-This takes 5–10 minutes. A good CLAUDE.md is the difference between an agent that
-guesses at your conventions and one that follows them consistently.
-
----
-
-### F2 — Delete a Trip
-
-**Goal:** `POST /trips/{id}/delete` removes the trip and redirects to `/`.
-
-**What this teaches:** a complete vertical slice — data layer helper, route, and
-template change — directed as a single Claude Code task. This is the pattern you
-will repeat for F3 and F4.
-
-**Direct Claude Code to:**
-- Add `delete_trip(conn, trip_id)` to `db.py`
-- Add the `POST /trips/{trip_id}/delete` route to `main.py`
-- Add a Delete button (or link-as-form) to the trips list template
-
-**Spec the task with C7 (or give a direct instruction):**
-> "Files to read first: `main.py`, `db.py`, `templates/trips_list.html`. Files to
-> modify: `db.py` (add delete_trip), `main.py` (add delete route), `trips_list.html`
-> (add delete button). Do not add authentication or confirmation dialogs."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Also manually: add a trip via the form, delete it, confirm it disappears from the list.
-
-> **If the delete button submits a GET instead of a POST:** HTML forms only support
-> GET and POST. The route uses POST. Make sure the template uses `method="post"` and
-> wraps the button in a `<form>` tag.
-
-**Checkpoint H8-1:** `pytest -v` passes; trips can be deleted via the browser.
-
----
-
-### F3 — Edit a Trip
-
-**Goal:** `GET /trips/{id}/edit` shows a pre-filled form; `POST /trips/{id}/edit`
-saves changes and redirects.
-
-**What this teaches:** reusing the existing add-trip pattern. The trip form template
-already handles validation errors — F3 should extend it rather than duplicate it.
-
-**Direct Claude Code to:**
-- Add `get_trip(conn, trip_id)` and `update_trip(conn, trip_id, ...)` to `db.py`
-- Add the GET and POST `/trips/{trip_id}/edit` routes to `main.py`
-- Extend `trip_form.html` so that when a `trip` object is passed in, form fields are
-  pre-populated
-
-**Review prompt for Claude Code:** "The add-trip route in `main.py` and the
-`trip_form.html` template already handle form validation. F3 should reuse that form
-template, not create a new one. Please read both before writing anything."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Manual check: edit an existing trip; change the vehicle field; confirm the change
-appears in the list. Also verify that an edit with invalid data (e.g. empty vehicle)
-shows the form again with an error message — not a 500.
-
-> **If the edit form shows blank fields instead of the trip's current values:**
-> the template is not receiving the `trip` object, or the field `value` attributes
-> are not wired up. Ask Claude Code to check what context variables the route passes
-> to the template.
-
-**Checkpoint H8-2:** `pytest -v` passes; trips can be edited via the browser.
-
----
-
-### F4 — Per-Jurisdiction Miles
-
-**Goal:** Add a `trip_jurisdictions` table so each trip can record how many miles
-were driven in each US state. This is the schema that makes F5 possible.
-
-**What this teaches:** schema changes ripple — model, data layer, route, template,
-tests all need updating when the data model grows.
-
-**Direct Claude Code to:**
-- Add the `trip_jurisdictions` table to `db.init_db()` in `db.py`. Schema:
-  `(id, trip_id FK → trips, state_code TEXT, miles REAL, UNIQUE(trip_id, state_code))`
-- Add `get_trip_jurisdictions(conn, trip_id)` and
-  `set_trip_jurisdictions(conn, trip_id, jurisdiction_miles: dict[str, float])` to
-  `db.py`
-- Update the trip form to include optional `state_<CODE>` input fields for
-  at least 3 states (e.g. `state_TX`, `state_OK`, `state_IL`) that the create and
-  edit routes will read and persist
-- Update `create_trip` and `update_trip` routes to call `set_trip_jurisdictions`
-  with whatever state miles are present in the form
-
-**Anti-goal to include in your prompt:** "Do not require jurisdiction miles — they
-are optional per trip. A trip with no jurisdiction fields is still valid."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Manual check: create a trip, enter miles for two states, save, edit that trip, and
-confirm the state miles are pre-filled.
-
-> **If the existing tests fail after adding the new table:** `db.init_db()` uses
-> `CREATE TABLE IF NOT EXISTS`, so the new table should not break existing behaviour.
-> If tests fail, check that `init_db()` was not accidentally changed to drop and
-> recreate existing tables.
-
-**Checkpoint H8-3:** `pytest -v` passes; jurisdiction miles are stored and retrievable.
-
----
-
-### Hour 8 Complete — End-State Check
-
-```bash
-pytest -v
-```
-
-Expected: all tests pass. Then verify in the browser:
-
-- [ ] Delete button removes a trip from the list
-- [ ] Edit form pre-fills the existing data and saves changes
-- [ ] A trip can record miles for individual states, saved and shown again on edit
-
-If any of these are missing, do not move to Hour 9.
-
----
-
-## HOUR 9 — Frontend, Tests, and Deployment: F5 through F8
-
----
-
-### F5 — IFTA Apportionment Summary Page
+## F5 — IFTA Apportionment Summary Page
 
 **Goal:** `GET /apportionment` shows a page summarising total miles per jurisdiction
 across all trips, with each jurisdiction's percentage of total miles.
@@ -271,7 +105,7 @@ show a helpful message rather than a crash.
 
 ---
 
-### F6 — Sortable Dashboard
+## F6 — Sortable Dashboard
 
 **Goal:** `GET /dashboard` shows a per-vehicle summary table (trip count, total
 miles, distinct jurisdictions visited) that can be sorted by any column via query
@@ -302,7 +136,7 @@ pytest -v
 
 ---
 
-### F7 — Add a Jurisdiction Rate
+## F7 — Add a Jurisdiction Rate
 
 **Goal:** `GET /jurisdictions` lists the rate table; `POST /jurisdictions` adds or
 updates a rate. The table is used by F5 to show tax rates alongside miles.
@@ -335,7 +169,7 @@ file exists at `.claude/skills/add-jurisdiction/SKILL.md`.
 
 ---
 
-### Test Suite Expansion
+## Test Suite Expansion
 
 With the feature pages built, and before you containerise the app, spend 10 minutes
 expanding the test suite to cover any behaviour that is not yet tested. Use
@@ -361,7 +195,7 @@ pytest -v
 
 ---
 
-### Visual and Navigational Polish
+## Visual and Navigational Polish
 
 This is not a UI course, but the app should be navigable. Ask Claude Code to:
 
@@ -377,7 +211,7 @@ Keep this short — 5–10 minutes. The goal is "usable," not "beautiful."
 
 ---
 
-### F8 — Containerise + Runbook
+## F8 — Containerise + Runbook
 
 **Goal:** A `Dockerfile` that builds and runs the app; a `RUNBOOK.md` that Claude
 Code can execute to build, run, smoke-test, and roll back.
@@ -442,7 +276,7 @@ Claude Code executes the runbook without needing to deviate from its steps.
 
 ---
 
-### Hour 9 Complete — Final End-State Verification
+## Hour 9 Complete — Final End-State Verification
 
 ```bash
 # All tests pass locally
@@ -489,8 +323,6 @@ Before leaving:
 |---------|-------------|-----|
 | `uvicorn: command not found` | venv not activated | `source venv/Scripts/activate` (Windows) or `source venv/bin/activate` (macOS/Linux) |
 | `pytest` fails with import error | Package not in venv | `pip install -r requirements.txt` with venv active |
-| Delete button has no effect | Form method is GET, not POST | Check `<form method="post">` in template |
-| Edit form shows blank fields | Route not passing `trip` object to template | Check context dict in the GET route |
 | `/apportionment` returns 500 | No `service.py` yet, or import error | Check that `import service` is in `main.py` |
 | Percentages don't sum to 100 | Floating-point drift without remainder logic | Apply "last row gets the remainder" pattern |
 | `docker build` fails at pip | Missing package in requirements.txt | Add `httpx` and any other missing packages |

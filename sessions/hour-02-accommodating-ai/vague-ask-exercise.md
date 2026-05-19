@@ -1,4 +1,4 @@
-# D2 — In-Class Exercise: Rewrite a Vague Ask as an AI-Ready Spec
+# In-Class Exercise: Rewrite a Vague Ask as an AI-Ready Spec
 
 iGEN Developer AI Training · Session 1 (Hour 2)
 
@@ -24,7 +24,7 @@ That's it. That's all you got.
 
 ## Your Task
 
-Open `handouts/C7-ai-ready-spec-template.md` (or your printed copy). Work through each section of the template for this ask.
+Open `C7-ai-ready-spec-template.md` (in this folder, or your printed copy). Work through each section of the template for this ask.
 
 A few sections to pay special attention to:
 

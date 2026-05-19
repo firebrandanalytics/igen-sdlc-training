@@ -1,4 +1,4 @@
-# D4 — In-Class Exercise: Write a SKILL.md and a Wrapper Script
+# In-Class Exercise: Write a SKILL.md and a Wrapper Script
 
 iGEN Developer AI Training · Session 3 (Hour 5)
 

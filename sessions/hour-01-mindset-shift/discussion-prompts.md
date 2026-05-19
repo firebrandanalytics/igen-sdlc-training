@@ -1,4 +1,4 @@
-# D1 — Group Discussion: Where Are You on the Spectrum?
+# Group Discussion: Where Are You on the Spectrum?
 
 iGEN Developer AI Training · Session 1 (Hour 1)
 
