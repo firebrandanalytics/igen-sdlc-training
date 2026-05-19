@@ -2,12 +2,6 @@
 
 iGEN Developer AI Training · Hour 9
 
-> **[Needs Tech Review]** — Docker commands (F8), pytest patterns, and FastAPI
-> version-specific behaviour should be verified against the distributed environment
-> before this sheet is used live. IFTA apportionment logic in F5 uses illustrative
-> rates — verify with Augustus before the live session. Claude Code command
-> references should be confirmed against the locked demo environment.
-
 ---
 
 ## What You Are Building

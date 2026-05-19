@@ -2,11 +2,6 @@
 
 iGEN Developer AI Training · Hour 8
 
-> **[Needs Tech Review]** — pytest patterns and FastAPI version-specific
-> behaviour should be verified against the distributed environment before this
-> sheet is used live. Claude Code command references should be confirmed against
-> the locked demo environment.
-
 ---
 
 ## What You Are Building

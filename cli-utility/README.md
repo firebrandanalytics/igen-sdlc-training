@@ -3,9 +3,6 @@
 > own pace. It is not part of the in-class session. Work through as much or as
 > little as is useful to you.
 
-> **[Needs Tech Review]** — IFTA domain rules are illustrative placeholders. Augustus
-> will verify before distribution.
-
 # IFTA Fuel-Tax Calculator — Self-Study Reference
 
 Build a command-line tool that computes IFTA fuel-tax apportionment from a CSV of

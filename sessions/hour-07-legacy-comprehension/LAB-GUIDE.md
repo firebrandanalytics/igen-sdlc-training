@@ -2,10 +2,6 @@
 
 iGEN Developer AI Training · Session 4 (Hour 7)
 
-> **[Needs Tech Review]** — Claude Code command syntax and pytest invocation
-> should be verified against the distributed Windows environment before this
-> sheet is used live.
-
 ---
 
 ## What this lab is for

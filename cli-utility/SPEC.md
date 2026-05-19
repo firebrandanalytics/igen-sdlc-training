@@ -1,6 +1,3 @@
-> **[Needs Tech Review]** — IFTA domain rules (tax rates, apportionment formula,
-> rounding) are illustrative placeholders. Augustus will verify before the live session.
-
 # IFTA Fuel-Tax Calculator — Exercise Specification (Hour 7)
 
 ## Background

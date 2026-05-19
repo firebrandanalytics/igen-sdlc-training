@@ -11,7 +11,6 @@ Each entry:
     rate  : tax rate in USD per gallon (placeholder)
 """
 
-# [Needs Tech Review] — rates are illustrative placeholders only.
 JURISDICTIONS: dict[str, dict] = {
     "IL": {"name": "Illinois",   "rate_per_gallon": 0.455},
     "IN": {"name": "Indiana",    "rate_per_gallon": 0.530},

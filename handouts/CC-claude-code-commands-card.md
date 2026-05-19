@@ -1,12 +1,8 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # Claude Code Commands — Muscle-Memory Card
 
 iGEN Developer AI Training · Instructor request — highest-frequency commands only
 
 These are the ~15–20 commands and features you'll reach for every day. Not exhaustive — just the ones worth memorising. Verify the current Claude Code version for exact syntax.
-
-<!-- VERIFY: all slash commands, flags, and described behaviours against the Claude Code version installed on attendee machines -->
 
 ---
 
@@ -15,9 +11,9 @@ These are the ~15–20 commands and features you'll reach for every day. Not exh
 | What you want | How to do it |
 |--------------|-------------|
 | Start Claude Code in the current directory | `claude` |
-| Start with a specific model | `claude --model claude-haiku-4-5` <!-- VERIFY: exact flag name and model ID --> |
-| Start in planning mode (plan before executing) | `claude --plan` <!-- VERIFY: confirm --plan is the correct flag or whether planning mode is invoked differently --> |
-| Resume the previous session | `claude --continue` <!-- VERIFY: exact flag --> |
+| Start with a specific model | `claude --model claude-haiku-4-5` |
+| Start in planning mode (plan before executing) | `claude --plan` |
+| Resume the previous session | `claude --continue` |
 
 ---
 
@@ -28,23 +24,21 @@ Type these at the Claude Code prompt (the `>` line).
 | Command | What it does |
 |---------|-------------|
 | `/help` | List available slash commands |
-| `/plan` | Ask Claude to write a plan for what it's about to do, and pause for your approval before executing anything <!-- VERIFY: confirm /plan triggers a plan-then-wait-for-approval flow --> |
+| `/plan` | Ask Claude to write a plan for what it's about to do, and pause for your approval before executing anything |
 | `/compact` | Summarise and compress the conversation context. Use before context fills up and quality degrades. Does NOT start a new conversation — history is summarised, not cleared. |
 | `/clear` | Clear the conversation entirely and start fresh. Use when you are done with a task and starting something unrelated, or when the context has drifted far from the current task. |
-| `/status` | Show current session info — model, context usage, approval mode <!-- VERIFY: /status exists and shows these fields --> |
-| `/model <name>` | Switch the model mid-session <!-- VERIFY: /model command exists and accepts a model name --> |
+| `/status` | Show current session info — model, context usage, approval mode |
+| `/model <name>` | Switch the model mid-session |
 
 ---
 
 ## Approval Mode
 
-<!-- VERIFY: the exact commands or settings for switching approval modes in the current Claude Code version -->
-
 | What you want | How to do it |
 |--------------|-------------|
-| Switch to manual approval (approve every action) | <!-- VERIFY: command or setting --> |
-| Switch to Auto Mode (agent self-assesses risk) | <!-- VERIFY: command or setting --> |
-| See current approval mode | `/status` <!-- VERIFY --> |
+| Switch to manual approval (approve every action) | |
+| Switch to Auto Mode (agent self-assesses risk) | |
+| See current approval mode | `/status` |
 
 > **Quick discipline:** start a new codebase in manual mode. Switch to Auto Mode once you've seen a few actions and trust the direction.
 
@@ -129,6 +123,3 @@ Only modify db.py and tests/test_db.py. Do not touch main.py or service.py yet.
 - **Conversation history is not saved between separate `claude` invocations** (unless you use `--continue`). If you close the terminal, the context is gone.
 - **The agent sees your working directory.** It reads files relative to where you started `claude`. Start from the repo root.
 - **Long outputs get truncated in display** but the agent received the full content. If you want to see the full output, ask the agent to write it to a file.
-
-<!-- VERIFY: --continue flag behaviour — does it truly resume the previous session, and for how long is that session available? -->
-<!-- VERIFY: whether starting from a non-root directory causes issues with CLAUDE.md discovery -->

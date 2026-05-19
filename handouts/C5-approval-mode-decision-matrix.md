@@ -1,5 +1,3 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C5 — Approval Mode Decision Matrix
 
 iGEN Developer AI Training · Session 2 (Hour 3) reference card
@@ -9,8 +7,6 @@ Scan this card in 30 seconds. Use the middle column as the default.
 ---
 
 ## The Three Modes
-
-<!-- VERIFY: confirm the exact names Claude Code uses for each mode (Manual / Auto Mode / fully unsandboxed), and whether there are intermediate levels within each -->
 
 | | Manual Approval | Auto Mode | Unsandboxed (VM only) |
 |---|---|---|---|
@@ -50,8 +46,6 @@ Scan this card in 30 seconds. Use the middle column as the default.
 
 Auto Mode still pauses in certain situations. When it does, that is the signal to pay attention.
 
-<!-- VERIFY: confirm the specific categories of actions that trigger an Auto Mode pause in the current Claude Code version (e.g., git push, env file writes, destructive file ops) -->
-
 Common pause triggers (verify with lead instructor):
 - Writing or modifying `.env` files
 - `git push` to a remote
@@ -66,5 +60,3 @@ When Auto Mode pauses and asks, **read the action before approving.** That is st
 ## One-Line Summary
 
 > **Manual** = you see everything. **Auto Mode** = you see what matters. **Unsandboxed** = the VM is the guardrail.
-
-<!-- VERIFY: confirm Auto Mode cost framing — is the overhead truly "nominal" on an enterprise pay-per-use plan, or is there a more precise description the lead instructor prefers? -->

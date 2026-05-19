@@ -1,5 +1,3 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C10 — "What Good Looks Like" — Review Rubric for AI-Assisted Code
 
 iGEN Developer AI Training · Used in Hours 7, 8, and 9
@@ -21,8 +19,6 @@ Read through the diff once to understand what changed. Then scan each category b
 - [ ] **Trace the happy path manually.** Can you follow the code from entry point to output and confirm the logic is right?
 - [ ] **Look for off-by-one errors.** Loops, slice indexes, date ranges. These are the most common subtle errors in AI-generated code.
 - [ ] **Verify rounding and arithmetic.** In financial or tax contexts (IFTA, fuel tax) — is rounding applied at the right point? Is integer arithmetic used where float would produce drift?
-
-<!-- VERIFY: add any iGEN/IFTA-specific correctness checks the lead instructor considers critical -->
 
 ---
 
@@ -86,6 +82,3 @@ Read through the diff once to understand what changed. Then scan each category b
 ## One-Line Summary
 
 > Re-read the spec. Check the imports. Verify the assertions. Look for secrets. Confirm scope. Run the tests.
-
-<!-- VERIFY: confirm the linter and test commands match what's in the mileage-logbook starter's CLAUDE.md / project setup -->
-<!-- VERIFY: add any iGEN-specific review criteria the lead instructor considers standard for production code (Azure DevOps PR conventions, etc.) -->

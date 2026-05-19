@@ -1,15 +1,8 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C9 — Microsoft Graph CLI Quick Reference
 
 iGEN Developer AI Training · Session 2 (Hour 4) reference
 
 Commands for email, Teams, and SharePoint using the `Microsoft.Graph` PowerShell module distributed to attendees. All commands run in **PowerShell 7**.
-
-<!-- VERIFY: confirm the exact module name and version distributed to attendees (Microsoft.Graph, Microsoft.Graph.Beta, or a subset of modules) -->
-<!-- VERIFY: confirm Connect-MgGraph is the correct authentication command and that interactive browser auth is available in the attendee environment -->
-<!-- VERIFY: all command names, parameter names, and output property names below — PowerShell Graph module cmdlet names change between module versions -->
-
 ---
 
 ## Authentication
@@ -26,8 +19,6 @@ Disconnect-MgGraph
 ```
 
 > Add only the scopes you need. More scopes = broader permissions = more to explain to IT.
-
-<!-- VERIFY: confirm the specific scopes required for the operations shown in this document, and that these scopes are pre-consented in the iGEN Azure tenant -->
 
 ---
 
@@ -74,8 +65,6 @@ $params = @{
 Send-MgUserMail -UserId "me" -BodyParameter $params
 ```
 
-<!-- VERIFY: confirm Send-MgUserMail is the correct cmdlet name in the deployed module version -->
-
 ---
 
 ## Teams
@@ -102,8 +91,6 @@ $params = @{
 }
 New-MgTeamChannelMessage -TeamId "<team-id>" -ChannelId "<channel-id>" -BodyParameter $params
 ```
-
-<!-- VERIFY: confirm New-MgTeamChannelMessage is the correct cmdlet and that BodyParameter is the right parameter name -->
 
 ---
 
@@ -136,8 +123,6 @@ $item = Get-MgDriveItem -DriveId "<drive-id>" -DriveItemId "<item-id>" -Property
 Invoke-WebRequest -Uri $item.AdditionalProperties["@microsoft.graph.downloadUrl"] -OutFile "localfile.xlsx"
 ```
 
-<!-- VERIFY: confirm the property name "@microsoft.graph.downloadUrl" and the pattern for retrieving it in the deployed module version -->
-
 ---
 
 ## Finding IDs
@@ -160,5 +145,3 @@ Get-MgSite -Search "<keyword>" | Select-Object DisplayName, Id
 - **Store IDs in .env.** Put `TEAMS_CHANNEL_ID`, `SHAREPOINT_SITE_ID`, etc. in `.env` so Claude Code can reference them without asking. The agent reads `$env:TEAMS_CHANNEL_ID`; it doesn't need to look it up every session.
 - **Wrap repeated calls in a function.** If you post to the same Teams channel every day, wrap `New-MgTeamChannelMessage` in a function with the IDs baked in.
 - **Ask Claude Code to write the wrapper.** Give it the raw command and the parameters, and ask for a named PowerShell function. That function is now a "Make Correctness Easy" asset.
-
-<!-- VERIFY: confirm that PowerShell environment variables are referenced as $env:VARNAME and that .env loading in PowerShell is handled (e.g., via a dot-sourcing helper or a module) -->

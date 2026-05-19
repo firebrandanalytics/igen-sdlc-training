@@ -1,5 +1,3 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C2 — CLAUDE.md Template + Annotated Example
 
 iGEN Developer AI Training · Session 3 (Hour 5) reference
@@ -232,6 +230,3 @@ production / CI.
 > **Footnote — AGENTS.md:** Some cross-tool environments use `AGENTS.md` as the
 > portable equivalent of `CLAUDE.md`. This course teaches `CLAUDE.md` exclusively;
 > the format and intent are identical.
-
-<!-- VERIFY: confirm that CLAUDE.md is the canonical filename read automatically by the current Claude Code version — no additional flag required -->
-<!-- VERIFY: confirm that Jinja2 and server-side rendering is the intended approach for the course mileage-logbook app (no htmx / HTMX additions planned) -->

@@ -2,8 +2,6 @@
 
 iGEN Developer AI Training · Session 2 (Hour 4)
 
-> **[Needs Tech Review]** — verify the expected project structure, venv activation commands, and test invocation against the distributed environment (Git Bash on Windows + Python 3 in PATH) before this sheet is distributed. Confirm that the grading check (`python -m pytest`) works out-of-the-box on attendee machines.
-
 ---
 
 ## What You're Doing

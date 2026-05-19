@@ -2,8 +2,6 @@
 
 iGEN Developer AI Training · Session 3 (Hour 5)
 
-> **[Needs Tech Review]** — verify SKILL.md folder format and slash-command invocation against the deployed Claude Code version before distributing; confirm the ~300-line threshold for single-file vs. folder is the rule you want to teach; confirm that bash functions sourced in Git Bash work as expected on attendee machines.
-
 ---
 
 ## What You're Doing

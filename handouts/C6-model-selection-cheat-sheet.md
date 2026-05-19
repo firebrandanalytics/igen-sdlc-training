@@ -1,14 +1,8 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C6 — Model Selection Cheat Sheet
 
 iGEN Developer AI Training · Session 2 (Hour 3) reference
 
 No prices — they change. Use relative cost and behavior to make the call.
-
-<!-- VERIFY: confirm the current Anthropic model family names and tier names (Opus / Sonnet / Haiku or successors) in the version of Claude Code deployed to attendees -->
-<!-- VERIFY: confirm relative cost/speed characterizations are still accurate for the deployed models -->
-
 ---
 
 ## The Three Tiers
@@ -86,5 +80,3 @@ If Sonnet gives you a repeated wrong answer, switch to Opus for that specific su
 ## One-Line Summary
 
 > **Haiku** = fast and cheap for mechanical tasks. **Sonnet** = most engineering work. **Opus** = complex reasoning and planning.
-
-<!-- VERIFY: confirm whether Claude Code allows model selection per-session or per-command, and how attendees switch between tiers (flag, setting, or config) -->

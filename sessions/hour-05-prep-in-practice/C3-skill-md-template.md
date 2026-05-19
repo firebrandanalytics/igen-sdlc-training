@@ -1,5 +1,3 @@
-> **[Needs Tech Review]** — verify with lead instructor before use.
-
 # C3 — SKILL.md Template + Annotated Example
 
 iGEN Developer AI Training · Session 3 (Hour 5) reference
@@ -203,6 +201,3 @@ This is a repetitive, error-prone task that benefits from automation:
 > (CI, Docker) without guessing.
 
 ---
-
-<!-- VERIFY: confirm that the SKILL.md folder format (index.md + sub-files) is supported by the current Claude Code version and that sub-files are followed as linked references -->
-<!-- VERIFY: confirm the ~300-line threshold for single-file vs. folder is the heuristic the lead instructor wants to teach -->

@@ -8,11 +8,6 @@ iGEN Developer AI Training · Self-Study Take-Home Reference
 > the course, not for use during Session 4. Work through it at whatever depth is
 > useful to you.
 
-> **[Needs Tech Review]** — IFTA domain rules, tax rates, and the expected output
-> values in this guide depend on placeholder rates in `jurisdictions.py`. Augustus
-> will verify the rates and the corresponding expected output before distribution.
-> Claude Code version references should be confirmed against the locked demo environment.
-
 ---
 
 ## Before You Start

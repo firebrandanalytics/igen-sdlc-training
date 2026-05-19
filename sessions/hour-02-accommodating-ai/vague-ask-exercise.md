@@ -2,8 +2,6 @@
 
 iGEN Developer AI Training · Session 1 (Hour 2)
 
-> **[Needs Tech Review]** — the source ask below should be verified with the lead instructor for iGEN realism before this sheet is distributed. Confirm that the filing-system details, anomaly types, and data access pattern are accurate to iGEN's environment.
-
 ---
 
 ## What You're Doing
