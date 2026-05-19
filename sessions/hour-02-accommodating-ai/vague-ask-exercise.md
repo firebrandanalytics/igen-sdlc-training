@@ -47,6 +47,6 @@ When the room reconvenes, be ready to share:
 
 ## Notes for the Instructor
 
-This exercise pairs with the vague-vs-AI-ready contrast demo in Hour 3. If time allows, the instructor can take one attendee's spec and run it live against the vague version to show the difference in output.
+This exercise pairs with the vague-vs-AI-ready contrast demo in Hour 2. If time allows, the instructor can take one attendee's spec and run it live against the vague version to show the difference in output.
 
 The before/after example in C7 (flagging suspicious trips) is a different domain — it's a web-app feature. This exercise is a standalone script task so attendees practice the template on something that isn't the course's worked example.
