@@ -2,11 +2,16 @@
 
 iGEN Developer AI Training · Instructor request — highest-frequency commands only
 
-These are the ~15–20 commands and features you'll reach for every day. Not exhaustive — just the ones worth memorising. Verify the current Claude Code version for exact syntax.
+These are the ~20 commands, shortcuts, and features you'll reach for every day.
+Not exhaustive — just the ones worth memorising. A few keyboard shortcuts
+differ on Windows; those are noted inline. Verify the current Claude Code
+version for exact syntax.
 
 ---
 
 ## Starting a Session
+
+Run these in your terminal (Git Bash on Windows) to start Claude Code.
 
 | What you want | How to do it |
 |--------------|-------------|
@@ -14,6 +19,7 @@ These are the ~15–20 commands and features you'll reach for every day. Not exh
 | Start with a specific model | `claude --model claude-haiku-4-5` |
 | Start in planning mode (plan before executing) | `claude --permission-mode plan` |
 | Resume the previous session | `claude --continue` |
+| Pick an earlier session to resume | `claude --resume` |
 
 ---
 
@@ -29,37 +35,71 @@ Type these at the Claude Code prompt (the `>` line).
 | `/clear` | Clear the conversation entirely and start fresh. Use when you are done with a task and starting something unrelated, or when the context has drifted far from the current task. |
 | `/status` | Show current session info — model, context usage, approval mode |
 | `/model <name>` | Switch the model mid-session |
+| `/doctor` | Diagnose a broken setup — checks your install, config, and environment, and can offer fixes |
 
 ---
 
-## Approval Mode
+## Keyboard Shortcuts
 
-| What you want | How to do it |
-|--------------|-------------|
-| Switch approval mode | Press `Shift+Tab` to cycle through the modes |
-| See the current mode | Shown in the input box as you work |
+These work *inside* a Claude Code session — no slash, just the keys.
 
-> **Quick discipline:** start a new codebase in manual mode. Switch to Auto Mode once you've seen a few actions and trust the direction.
+**Controlling the session**
+
+| Keys | What it does |
+|------|-------------|
+| `Ctrl+C` | Interrupt — stop Claude while it is working |
+| `Esc` | Cancel / clear the prompt you are typing |
+| `Ctrl+D` | Exit Claude Code |
+| `↑` / `↓` | Scroll back through your previous prompts |
+| `Ctrl+R` | Search your prompt history |
+
+**Writing a prompt**
+
+| Keys | What it does |
+|------|-------------|
+| `Ctrl+J` | New line *without* submitting — for multi-line prompts |
+| `Ctrl+G` | Open your prompt in an external editor (handy for long prompts) |
+| `Ctrl+V` | Paste an image — e.g. a screenshot (Windows / Git Bash: `Alt+V`) |
+
+**Seeing what happened**
+
+| Keys | What it does |
+|------|-------------|
+| `Ctrl+O` | Toggle the full transcript — every tool call and the full output |
+| `Ctrl+T` | Toggle the task / to-do list |
+
+> Shortcuts are customisable — run `/keybindings` to see or change them.
 
 ---
 
-## Asking Claude to Explain Before Approving
+## Permission & Approval
 
-You don't need a special command for this — just ask before approving:
+Two things to know here: which *mode* you are in, and what you press when
+Claude *asks*.
 
-```
-What will this change do to the existing test for delete_trip?
-```
+**Cycle the approval mode** — press `Shift+Tab` to rotate through three modes:
 
-```
-Show me what the diff will look like before you write it.
-```
+1. **Manual** — Claude asks before every action (the default)
+2. **Auto-accept edits** ("Auto Mode") — file edits apply automatically; shell commands still ask
+3. **Plan mode** — Claude only plans; it writes nothing until you approve the plan
 
-```
-Before you make any changes: what files will you touch, and why?
-```
+The current mode is shown in the input box as you work.
 
-The agent answers before acting. Make it a habit on any change that touches more than one file.
+**At a permission prompt** — when Claude stops to ask before running something:
+
+| Keys | What it does |
+|------|-------------|
+| `Y` or `Enter` | Approve this action |
+| `N` or `Esc` | Decline it |
+| `Ctrl+E` | **Toggle the explanation** — show exactly what the action will do before you decide |
+
+> **`Ctrl+E` is the one to build muscle memory for.** On anything you are not
+> sure about — an unfamiliar command, a multi-file edit — press `Ctrl+E` first,
+> read what it actually does, *then* approve or decline. You can also ask Claude
+> in plain English before approving (see Useful One-Liners below).
+
+> **Quick discipline:** start a new codebase in Manual mode. Move to
+> Auto-accept once you have seen a few actions and trust the direction.
 
 ---
 
@@ -121,4 +161,4 @@ Only modify db.py and tests/test_db.py. Do not touch main.py or service.py yet.
 - **Claude Code inherits your shell's environment.** Variables you export in your shell (or load from `.env`) are available to the commands the agent runs.
 - **Conversation history is not saved between separate `claude` invocations** (unless you use `--continue`). If you close the terminal, the context is gone.
 - **The agent sees your working directory.** It reads files relative to where you started `claude`. Start from the repo root.
-- **Long outputs get truncated in display** but the agent received the full content. If you want to see the full output, ask the agent to write it to a file.
+- **Long outputs get truncated in display** but the agent received the full content. Press `Ctrl+O` to expand the transcript, or ask the agent to write the full output to a file.
