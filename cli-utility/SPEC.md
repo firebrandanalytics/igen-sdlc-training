@@ -148,4 +148,4 @@ SPEC.md                  # this file
   packages are needed.
 - The `jurisdictions.py` module is already provided. Do not modify the rates during
   this exercise — that is intentional; Augustus will verify them separately.
-- All code must run on **Python 3.11+**.
+- All code must run on **Python 3.10+**.
