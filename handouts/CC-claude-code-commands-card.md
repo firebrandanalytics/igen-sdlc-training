@@ -12,7 +12,7 @@ These are the ~15–20 commands and features you'll reach for every day. Not exh
 |--------------|-------------|
 | Start Claude Code in the current directory | `claude` |
 | Start with a specific model | `claude --model claude-haiku-4-5` |
-| Start in planning mode (plan before executing) | `claude --plan` |
+| Start in planning mode (plan before executing) | `claude --permission-mode plan` |
 | Resume the previous session | `claude --continue` |
 
 ---
@@ -36,9 +36,8 @@ Type these at the Claude Code prompt (the `>` line).
 
 | What you want | How to do it |
 |--------------|-------------|
-| Switch to manual approval (approve every action) | |
-| Switch to Auto Mode (agent self-assesses risk) | |
-| See current approval mode | `/status` |
+| Switch approval mode | Press `Shift+Tab` to cycle through the modes |
+| See the current mode | Shown in the input box as you work |
 
 > **Quick discipline:** start a new codebase in manual mode. Switch to Auto Mode once you've seen a few actions and trust the direction.
 
