@@ -84,7 +84,7 @@ Before directing Claude Code to write any feature code, give it the context it
 needs to operate in this project. Open a Claude Code session in this folder
 (`sessions/hour-08-web-app-backend/`) and ask it to write a `CLAUDE.md` that covers:
 
-- Project purpose and stack (FastAPI, SQLite, Jinja2, Python 3.11+)
+- Project purpose and stack (FastAPI, SQLite, Jinja2, Python 3.10+)
 - The existing module layout (main.py, db.py, seed.py, templates/, tests/)
 - Testing convention (pytest; `client` fixture in `tests/conftest.py` provides a
   TestClient backed by a temp database; do not use the live `logbook.db`)
