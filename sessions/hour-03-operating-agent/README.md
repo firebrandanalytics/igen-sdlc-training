@@ -9,6 +9,7 @@ and how those choices compound into a sustainable (or runaway) cost.
 - `C5-approval-mode-decision-matrix.md` — when to use manual approval, Auto
   Mode, or an unsandboxed VM.
 - `C6-model-selection-cheat-sheet.md` — Opus / Sonnet / Haiku trade-offs.
+- `optional-planning-mode-exercise.md` — optional: a short hands-on with planning mode, if time allows.
 
 ## What we're doing this hour
 
@@ -19,6 +20,9 @@ and how those choices compound into a sustainable (or runaway) cost.
 - Model selection and cost optimization
 - IP, provenance, and governance basics
 
-## No exercise this hour
+## No required exercise this hour
 
-Hour 3 is conceptual. You put all of it into practice in Hour 4.
+Hour 3 is conceptual — you put all of it into practice in Hour 4. If the
+instructor runs the optional planning-mode demo and there's time,
+`optional-planning-mode-exercise.md` in this folder is a short hands-on you
+can try.
