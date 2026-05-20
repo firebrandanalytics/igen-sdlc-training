@@ -1,28 +1,20 @@
-# Hour 6 — SDLC Front-Half with AI: Requirements → Design → Stories → Test Plans
+# Day 2 · Segment 4 — SDLC Front-Half: Sharpen the Build Spec
 
-Walked through using the Mileage Logbook web app as the running example. We use
-Claude Code to interrogate and sharpen a vague stakeholder ask, generate a
-design sketch with explicit anti-goals, decompose into user stories, and write a
-test plan before any code exists.
+Use Claude Code to interrogate and sharpen a vague stakeholder ask into a
+real spec — the spec that drives your build in segment 5.
 
 ## In this folder
 
-- `front-half-sdlc-exercise.md` — produce your own requirements doc, story
-  breakdown, and test plan from a vague ask.
-- `C7-ai-ready-spec-template.md` — the spec template used in the exercise.
+- `front-half-sdlc-exercise.md` — the in-class hands-on: sharpen the F5 ask
+  into a working spec.
+- `C7-ai-ready-spec-template.md` — the spec template you'll use.
 
-## What we're doing this hour
+## What we're doing this segment
 
-- Interrogating and sharpening vague requirements
-- Design docs, architecture sketches, explicit anti-goals
-- Decomposing into user stories with tight acceptance criteria
-- Test-plan-first; the validate-and-correct loop
-- Exercise: front-half SDLC pass on the web app (`front-half-sdlc-exercise.md`)
+- Interrogating a vague stakeholder ask
+- Surfacing the implicit decisions an engineer would have to make
+- Producing a sharpened spec + a small design sketch
+- Output: an artifact you'll paste into planning mode in segment 5
 
-The web app this hour plans is the starter in `../hour-08-web-app-backend/` —
-the build itself happens in Hours 8–9.
-
-## Homework
-
-Homework #2 is assigned at the end of this hour — see
-`../../homework/homework-2-brief.md`. Due before Session 4.
+The web app this segment plans is the starter in `../hour-08-web-app-backend/` —
+the build runs in segment 5 immediately after.

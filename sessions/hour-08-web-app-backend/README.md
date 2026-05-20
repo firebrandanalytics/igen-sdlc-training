@@ -2,9 +2,9 @@
 
 A minimal web app for logging fuel-hauler trips. Built with FastAPI, Jinja2, and SQLite.
 
-This is the starter app for **Hours 8 and 9**. It runs out of the box — your job is to extend it.
+This is the starter app for **day 2 segment 5** — the web-app build. It runs out of the box; your job is to extend it with the F5 apportionment summary page.
 
-**Start with `LAB-GUIDE.md`** in this folder — it walks the Hour 8 build (features F2–F4). Hour 9 continues this *same app* in this folder; the Hour 9 lab guide is in `../hour-09-web-app-frontend-deploy/`.
+**Start with `LAB-GUIDE.md`** in this folder — it's the segment 5 reference (extract calc-skill → plan → parallel subagent build).
 
 ---
 

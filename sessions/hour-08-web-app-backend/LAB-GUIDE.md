@@ -1,231 +1,232 @@
-# Lab Guide: Mileage Logbook — Hour 8 (Backend)
+# Lab Guide: Web App Build — Segment 5
 
-iGEN Developer AI Training · Hour 8
+iGEN Developer AI Training · Day 2 · Segment 5 (120 min)
 
----
-
-## What You Are Building
-
-You are extending the Mileage Logbook starter — a minimal FastAPI + SQLite + Jinja2
-app that can already list and create trips. In Hour 8 you add the three backend
-features (F2–F4) by directing Claude Code through a structured build. Hour 9
-continues the *same app* with F5–F8 — that lab guide is in
-`../hour-09-web-app-frontend-deploy/LAB-GUIDE.md`.
-
-Read the starter app's `README.md` before you do anything else. It describes the
-data model, project layout, and how to run the existing tests.
-
-**Time:** approximately 50 minutes.
+This is your reference for the segment. The instructor will walk the room
+through each beat live; this guide is here so you can keep moving if you fall
+behind, or pick up from any beat if you arrived late.
 
 ---
 
-## Environment Setup
+## What you're building
 
-Do this once, before any Claude Code sessions. Run from the repo root.
+The **IFTA apportionment summary page** (F5): a page in the Mileage Logbook
+that shows tax owed per jurisdiction for trips in your data, using the
+authoritative calculation logic from the IFTA CLI.
 
-### Windows (Git Bash)
+You'll do it in three moves:
+
+1. **Extract a calc-skill** from the IFTA CLI (~25 min) — produce a markdown
+   document capturing how the math works.
+2. **Plan in planning mode** (~20 min) — feed planning mode your sharpened F5
+   spec (from segment 4) plus the calc-skill; iterate until the plan is good;
+   approve.
+3. **Build with parallel subagents** (~60 min) — split backend and frontend
+   into two subagents working against the plan's API contract; integrate;
+   test.
+
+Final ~15 min is debrief and close.
+
+---
+
+## Environment
+
+### From segment 4, you should already have:
+
+- Your sharpened **F5 spec** somewhere you can paste it (in your notes, in a
+  text file, anywhere).
+- The student repo's `cli-utility/` installed and tests passing
+  (`cd cli-utility && pytest -v` should show 12 passing).
+- The web-app starter installed (this folder — `hour-08-web-app-backend/`)
+  and tests passing (`pytest -v` should show 4 passing).
+
+### If you need to set up from scratch:
+
+#### CLI:
 
 ```bash
-cd sessions/hour-08-web-app-backend
-python -m venv venv
-source venv/Scripts/activate
-pip install -r requirements.txt
-python seed.py
-uvicorn main:app --reload
+cd cli-utility
+python3 -m venv .venv
+source .venv/bin/activate         # Windows Git Bash: source .venv/Scripts/activate
+pip install -e ".[dev]"
+pytest -v
 ```
 
-### macOS / Linux
+#### Web app:
 
 ```bash
 cd sessions/hour-08-web-app-backend
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate           # Windows Git Bash: source venv/Scripts/activate
 pip install -r requirements.txt
 python seed.py
+pytest -v
+uvicorn main:app --reload
+# then open http://127.0.0.1:8000
+```
+
+---
+
+## Beat 1 — Extract the calc-skill (25 min)
+
+Open Claude Code in `cli-utility/`. Run this prompt:
+
+```
+Read the source code under ifta_calculator/ and the tests in tests/. Produce a
+markdown document — a "calc skill" — that captures every authoritative rule,
+definition, and edge case the CLI uses to compute IFTA fuel tax. Treat the code
+and tests as the source of truth; ignore any prose documentation, including
+the README, when extracting the rules.
+
+Include at minimum:
+- The apportionment formula (how miles, fuel, and tax relate)
+- Rounding behaviour and where it applies
+- Per-jurisdiction special handling (rates, surcharges)
+- The full set of supported jurisdictions and what kind of codes they are
+- Any implicit assumptions (e.g., fuel type, period handling)
+- Behaviour on edge cases (empty input, unknown codes, invalid mpg)
+
+Anyone reading this document should be able to re-implement the calculations
+in a different codebase without seeing the original code.
+
+Write the output to ifta-calc-skill.md in this folder.
+```
+
+Read what it produces. Rules that are easy to miss: **surcharges** on certain
+states, **half-up rounding** at the cent, **silent multi-period aggregation**.
+Push the agent to dig deeper if the doc is shallow.
+
+> Quality check before you move on: would a Python developer who has never
+> seen this CLI be able to write a correct re-implementation from your
+> document alone? If not, send the agent back for another pass.
+
+---
+
+## Beat 2 — Planning mode (20 min)
+
+Now switch to the web-app starter:
+
+```bash
+cd ../hour-08-web-app-backend
+```
+
+Launch Claude Code in planning mode:
+
+```bash
+claude --permission-mode plan
+```
+
+(Or open normally and `Shift+Tab` into plan mode.)
+
+Run this prompt, filling in the two artifacts:
+
+```
+I want to build a new feature in this web app: an IFTA apportionment summary
+page. Below are TWO artifacts you must read carefully before planning anything.
+
+ARTIFACT 1 — Feature spec (what to build):
+<paste your sharpened F5 spec here>
+
+ARTIFACT 2 — Calculation rules (how the math works):
+<paste the contents of ifta-calc-skill.md here>
+
+Plan the implementation. The plan must include:
+
+1. Every file you will touch, and what specifically you will change in each.
+2. An EXPLICIT API contract — the JSON request/response shape between the
+   backend route and the frontend template, including field names and types.
+   We will implement backend and frontend in parallel against this contract,
+   so it must be unambiguous.
+3. The order of work, and which pieces can be built in parallel.
+4. Any place where the spec and the calc-skill might conflict, and your
+   proposed resolution.
+
+Do not write or modify any code yet. Wait for my approval before proceeding.
+```
+
+**Read the plan.** Push back. Iterate. Be especially picky about the API
+contract — that's the boundary between your two subagents in the next beat.
+
+Approve only when the plan is concrete enough that you'd trust the build.
+
+---
+
+## Beat 3 — Parallel subagent build (~60 min)
+
+In the same Claude Code session (the plan is in context), run:
+
+```
+Use subagents to implement the plan in parallel:
+
+- Subagent A: implement the backend per the plan — routes, database queries,
+  any calc helpers — matching the API contract exactly.
+- Subagent B: implement the frontend per the plan — template, any styling
+  needed — consuming the API contract exactly.
+
+Both subagents work against the API contract from the plan. When both are
+done, integrate (wire the route to the template), run the test suite, and
+report what passed and what didn't.
+```
+
+Approve actions as they come up. **`Ctrl+E` on anything you're not sure
+about** — see the action before approving. (Segment 2 muscle.) Auto-accept
+the obvious ones if you're in Auto-accept mode.
+
+### Running the app
+
+```bash
 uvicorn main:app --reload
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) and confirm you see a table of
-trips. The app starts with no CLAUDE.md — you will write one as part of the
-exercise.
+Then open the URL the agent built (likely something like
+`http://127.0.0.1:8000/apportionment`). Hard-reload (`Ctrl+Shift+R`) if the
+template change isn't showing.
 
-**Verify the starter tests pass before you add anything:**
-
-```bash
-pytest -v
-```
-
-Expected: 4 tests pass, 0 failures. If any fail, the environment is not set up
-correctly — do not proceed until they pass.
-
----
-
-## A Note on Approach
-
-Each feature below is a vertical slice: route, data layer, template, tests. Direct
-Claude Code to handle the whole slice at once — this is the agentic loop in
-practice, not tab-completing one file at a time.
-
-**The review discipline:** before each `pytest` run, read the diff. Claude Code
-occasionally adds an import it doesn't need, renames something that was already
-named consistently, or writes a test that doesn't actually exercise the code path it
-claims to. These are the things the C10 rubric is for.
-
----
-
-## Warm-Up — Write a CLAUDE.md
-
-Before directing Claude Code to write any feature code, give it the context it
-needs to operate in this project. Open a Claude Code session in this folder
-(`sessions/hour-08-web-app-backend/`) and ask it to write a `CLAUDE.md` that covers:
-
-- Project purpose and stack (FastAPI, SQLite, Jinja2, Python 3.10+)
-- The existing module layout (main.py, db.py, seed.py, templates/, tests/)
-- Testing convention (pytest; `client` fixture in `tests/conftest.py` provides a
-  TestClient backed by a temp database; do not use the live `logbook.db`)
-- Style conventions you care about (e.g. "query logic lives in db.py, not in route
-  handlers")
-
-This takes 5–10 minutes. A good CLAUDE.md is the difference between an agent that
-guesses at your conventions and one that follows them consistently.
-
----
-
-## F2 — Delete a Trip
-
-**Goal:** `POST /trips/{id}/delete` removes the trip and redirects to `/`.
-
-**What this teaches:** a complete vertical slice — data layer helper, route, and
-template change — directed as a single Claude Code task. This is the pattern you
-will repeat for F3 and F4.
-
-**Direct Claude Code to:**
-- Add `delete_trip(conn, trip_id)` to `db.py`
-- Add the `POST /trips/{trip_id}/delete` route to `main.py`
-- Add a Delete button (or link-as-form) to the trips list template
-
-**Spec the task with C7 (or give a direct instruction):**
-> "Files to read first: `main.py`, `db.py`, `templates/trips_list.html`. Files to
-> modify: `db.py` (add delete_trip), `main.py` (add delete route), `trips_list.html`
-> (add delete button). Do not add authentication or confirmation dialogs."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Also manually: add a trip via the form, delete it, confirm it disappears from the list.
-
-> **If the delete button submits a GET instead of a POST:** HTML forms only support
-> GET and POST. The route uses POST. Make sure the template uses `method="post"` and
-> wraps the button in a `<form>` tag.
-
-**Checkpoint H8-1:** `pytest -v` passes; trips can be deleted via the browser.
-
----
-
-## F3 — Edit a Trip
-
-**Goal:** `GET /trips/{id}/edit` shows a pre-filled form; `POST /trips/{id}/edit`
-saves changes and redirects.
-
-**What this teaches:** reusing the existing add-trip pattern. The trip form template
-already handles validation errors — F3 should extend it rather than duplicate it.
-
-**Direct Claude Code to:**
-- Add `get_trip(conn, trip_id)` and `update_trip(conn, trip_id, ...)` to `db.py`
-- Add the GET and POST `/trips/{trip_id}/edit` routes to `main.py`
-- Extend `trip_form.html` so that when a `trip` object is passed in, form fields are
-  pre-populated
-
-**Review prompt for Claude Code:** "The add-trip route in `main.py` and the
-`trip_form.html` template already handle form validation. F3 should reuse that form
-template, not create a new one. Please read both before writing anything."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Manual check: edit an existing trip; change the vehicle field; confirm the change
-appears in the list. Also verify that an edit with invalid data (e.g. empty vehicle)
-shows the form again with an error message — not a 500.
-
-> **If the edit form shows blank fields instead of the trip's current values:**
-> the template is not receiving the `trip` object, or the field `value` attributes
-> are not wired up. Ask Claude Code to check what context variables the route passes
-> to the template.
-
-**Checkpoint H8-2:** `pytest -v` passes; trips can be edited via the browser.
-
----
-
-## F4 — Per-Jurisdiction Miles
-
-**Goal:** Add a `trip_jurisdictions` table so each trip can record how many miles
-were driven in each US state. This is the schema that makes F5 possible.
-
-**What this teaches:** schema changes ripple — model, data layer, route, template,
-tests all need updating when the data model grows.
-
-**Direct Claude Code to:**
-- Add the `trip_jurisdictions` table to `db.init_db()` in `db.py`. Schema:
-  `(id, trip_id FK → trips, state_code TEXT, miles REAL, UNIQUE(trip_id, state_code))`
-- Add `get_trip_jurisdictions(conn, trip_id)` and
-  `set_trip_jurisdictions(conn, trip_id, jurisdiction_miles: dict[str, float])` to
-  `db.py`
-- Update the trip form to include optional `state_<CODE>` input fields for
-  at least 3 states (e.g. `state_TX`, `state_OK`, `state_IL`) that the create and
-  edit routes will read and persist
-- Update `create_trip` and `update_trip` routes to call `set_trip_jurisdictions`
-  with whatever state miles are present in the form
-
-**Anti-goal to include in your prompt:** "Do not require jurisdiction miles — they
-are optional per trip. A trip with no jurisdiction fields is still valid."
-
-**Verify:**
-```bash
-pytest -v
-```
-
-Manual check: create a trip, enter miles for two states, save, edit that trip, and
-confirm the state miles are pre-filled.
-
-> **If the existing tests fail after adding the new table:** `db.init_db()` uses
-> `CREATE TABLE IF NOT EXISTS`, so the new table should not break existing behaviour.
-> If tests fail, check that `init_db()` was not accidentally changed to drop and
-> recreate existing tables.
-
-**Checkpoint H8-3:** `pytest -v` passes; jurisdiction miles are stored and retrievable.
-
----
-
-## Hour 8 Complete — End-State Check
+### Running the tests
 
 ```bash
 pytest -v
 ```
 
-Expected: all tests pass. Then verify in the browser:
+The existing 4 tests should still pass; new tests for F5 should be added.
 
-- [ ] Delete button removes a trip from the list
-- [ ] Edit form pre-fills the existing data and saves changes
-- [ ] A trip can record miles for individual states, saved and shown again on edit
+### When tests fail
 
-If any of these are missing, fix them before Hour 9.
+That's normal. Read the failure with Claude Code, ask it to identify the
+disagreement (usually backend vs frontend on the API contract), fix, re-run.
 
-When all three pass, continue with the **Hour 9 lab guide** in
-`../hour-09-web-app-frontend-deploy/LAB-GUIDE.md` — you keep working in this same
-folder, with the code, database, and CLAUDE.md you produced here.
+### If you finish early
+
+Pick one stretch goal:
+- Sort the table by tax owed (descending)
+- Add a quarter filter so you can switch between Q1 and Q2
+- Make the surcharge jurisdictions visually distinct in the table
 
 ---
 
-## Appendix — Quick Troubleshooting
+## Pacing (rough markers from the start of the segment)
 
-| Symptom | Likely cause | Fix |
-|---------|-------------|-----|
-| `uvicorn: command not found` | venv not activated | `source venv/Scripts/activate` (Windows) or `source venv/bin/activate` (macOS/Linux) |
-| `pytest` fails with import error | Package not in venv | `pip install -r requirements.txt` with venv active |
-| Delete button has no effect | Form method is GET, not POST | Check `<form method="post">` in template |
-| Edit form shows blank fields | Route not passing `trip` object to template | Check context dict in the GET route |
-| Claude Code adds SQLAlchemy | Training data bias toward ORMs | Anti-goal: "Do not add SQLAlchemy — use the existing `sqlite3` helpers in db.py" |
+| Elapsed | Where you should be |
+|---:|---|
+| 25 min | Calc-skill written; switching to web-app |
+| 45 min | Plan approved |
+| 65 min | Both subagents reporting done; integrating |
+| 85 min | Page renders something; debugging integration |
+| 105 min | Tests green or close; debrief starting |
+
+If you're significantly behind, ask the instructor — there's an answer-key
+fallback (`solutions/web-app/` in the internal repo) for asynchronous
+completion.
+
+---
+
+## What you'll take from this
+
+The loop you just ran is the real workflow:
+
+1. **Extract** the implicit rules from the code that already owns them.
+2. **Plan** with explicit artifacts — spec + extracted rules.
+3. **Split** independent work into parallel subagents against a contract.
+4. **Integrate, test, fix.**
+
+Not all four steps every time, but the moves are the same. Use them on Monday.

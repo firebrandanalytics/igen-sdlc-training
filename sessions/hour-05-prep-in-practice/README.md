@@ -1,3 +1,9 @@
+> **Day-2 reshape note (2026-05-19):** this hour is dropped from the day-2
+> session. The CLAUDE.md / SKILL.md / wrapper-script lesson is replaced by a
+> *documentation-extraction* beat (segment 5) where you produce a calc-skill
+> from the IFTA CLI. The templates and checklist below remain useful as
+> self-study material.
+
 # Hour 5 — Prep Work in Practice: Skills, .env, and Bespoke Tooling
 
 We build the artifacts the course has been pointing at: a CLAUDE.md that pulls

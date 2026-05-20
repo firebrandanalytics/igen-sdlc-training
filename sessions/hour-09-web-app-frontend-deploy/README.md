@@ -1,3 +1,9 @@
+> **Day-2 reshape note (2026-05-19):** the day-2 web-app build is folded into
+> a single segment focused on the F5 apportionment summary page. The build
+> runs in `../hour-08-web-app-backend/` — start there. The F6/F7/F8 content
+> below (dashboard, jurisdictions skill, containerize) is not part of the
+> day-2 session; left here as reference for self-study.
+
 # Hour 9 — Worked Example 2, Part II: Frontend, Testing, Deployment
 
 Hour 9 finishes the Mileage Logbook. You continue the **same app you built in
