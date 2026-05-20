@@ -35,7 +35,7 @@ That's the entire ask. No acceptance criteria, no agreement on what
 
 ## Your task
 
-Open Claude Code in the web-app starter (`sessions/hour-08-web-app-backend/`).
+Open Claude Code in the web-app starter (`sessions/day2-05-web-app-build/`).
 Use the agent to help you surface decisions and draft text — but **you** make
 every call. By the end of 30 minutes you have a sharpened spec you would feel
 comfortable handing to planning mode in segment 5.
@@ -154,7 +154,7 @@ Be ready to share:
 ## Reference (peek if useful)
 
 The instructor-side worked example in the internal repo
-(`instructor-notes/hour-6-sdlc-walkthrough/01-vague-ask.md`,
+(`instructor-notes/day2-04-sdlc-front-half/01-vague-ask.md`,
 `02-sharpened-requirements.md`, `03-design-sketch.md`) is for a different
 feature ("flag suspicious trips") — useful as a model of *what the
 artifact looks like*, not as an answer for F5. Ask the instructor if you

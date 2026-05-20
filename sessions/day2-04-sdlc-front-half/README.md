@@ -16,5 +16,5 @@ real spec — the spec that drives your build in segment 5.
 - Producing a sharpened spec + a small design sketch
 - Output: an artifact you'll paste into planning mode in segment 5
 
-The web app this segment plans is the starter in `../hour-08-web-app-backend/` —
+The web app this segment plans is the starter in `../day2-05-web-app-build/` —
 the build runs in segment 5 immediately after.

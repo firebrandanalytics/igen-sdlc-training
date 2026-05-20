@@ -37,7 +37,7 @@ Final ~15 min is debrief and close.
   text file, anywhere).
 - The student repo's `cli-utility/` installed and tests passing
   (`cd cli-utility && pytest -v` should show 12 passing).
-- The web-app starter installed (this folder — `hour-08-web-app-backend/`)
+- The web-app starter installed (this folder — `day2-05-web-app-build/`)
   and tests passing (`pytest -v` should show 4 passing).
 
 ### If you need to set up from scratch:
@@ -55,7 +55,7 @@ pytest -v
 #### Web app:
 
 ```bash
-cd sessions/hour-08-web-app-backend
+cd sessions/day2-05-web-app-build
 python3 -m venv venv
 source venv/bin/activate           # Windows Git Bash: source venv/Scripts/activate
 pip install -r requirements.txt
@@ -107,7 +107,7 @@ Push the agent to dig deeper if the doc is shallow.
 Now switch to the web-app starter:
 
 ```bash
-cd ../hour-08-web-app-backend
+cd ../day2-05-web-app-build
 ```
 
 Launch Claude Code in planning mode:
