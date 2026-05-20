@@ -1,16 +1,14 @@
-> **Self-study take-home reference.** This CLI exercise is a worked greenfield
-> full-SDLC example — requirements through packaging — for you to explore at your
-> own pace. It is not part of the in-class session. Work through as much or as
-> little as is useful to you.
+# IFTA Fuel-Tax Calculator
 
-# IFTA Fuel-Tax Calculator — Self-Study Reference
+A small command-line tool that computes IFTA fuel-tax apportionment from a CSV
+of trip mileage records. Reads trips, aggregates miles per jurisdiction,
+computes fuel used and tax owed, and prints a summary table.
 
-Build a command-line tool that computes IFTA fuel-tax apportionment from a CSV of
-trip mileage records. Full requirements are in [SPEC.md](SPEC.md).
+This is the calculator that the web-app build references for its tax-math.
 
 ---
 
-## Quick start
+## Setup
 
 ### Windows (Git Bash or PowerShell 7)
 
@@ -28,47 +26,38 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-`cli.py` is a stub — it raises `NotImplementedError` until you implement it. Once
-you have built the calculator, verify it with:
+---
+
+## Run it
 
 ```bash
 ifta-calc --csv sample_data/trips.csv --mpg 6.5
 ```
 
+Output is a per-jurisdiction table with miles, fuel used, and tax owed,
+followed by totals.
+
 ---
 
-## Running tests
+## Tests
 
 ```bash
-pytest
+pytest -v
 ```
-
-The provided test in `tests/test_calculator.py` **fails** until you implement
-`calculate()`. That is intentional — it encodes the first acceptance criterion.
 
 ---
 
-## Project layout
+## Layout
 
 ```
 ifta_calculator/
     __init__.py
-    jurisdictions.py   # rate table (provided)
-    loader.py          # TODO: implement load_trips()
-    calculator.py      # TODO: implement calculate()
-    cli.py             # TODO: implement main()
+    jurisdictions.py   # rate + surcharge table
+    loader.py          # CSV -> list[dict]
+    calculator.py      # apportionment math
+    cli.py             # argparse + report formatter
 tests/
-    test_calculator.py # one failing test — make it pass
+    test_calculator.py # behavioural tests, one rule per test
 sample_data/
-    trips.csv          # sample input
-SPEC.md                # full requirements & acceptance criteria
+    trips.csv          # sample input (Q1 + Q2, US + Canada)
 ```
-
----
-
-## Key rules
-
-- Standard library only — no third-party packages.
-- Round `tax_owed` to 2 decimal places (cents).
-- Fleet MPG applies uniformly across all jurisdictions.
-- See SPEC.md for the complete list of acceptance criteria.

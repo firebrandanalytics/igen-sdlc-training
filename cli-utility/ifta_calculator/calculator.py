@@ -1,52 +1,62 @@
-"""
-IFTA apportionment calculator — STUB for students to implement.
-
-The calculate() function must:
-  1. Accept a list of trip records (dicts with keys: trip_id, vehicle_id,
-     period, jurisdiction, miles).
-  2. Compute total fleet miles across all jurisdictions.
-  3. For each jurisdiction, compute:
-       - jurisdiction_miles  : sum of miles driven in that jurisdiction
-       - fuel_used           : jurisdiction_miles / fleet_mpg
-       - tax_owed            : fuel_used * tax_rate_per_gallon
-     Round tax_owed to 2 decimal places (cents).
-  4. Return a list of JurisdictionResult dicts (see type below).
-
-You may add helper functions and modules as you see fit.
-Do NOT modify the function signature.
-"""
+"""IFTA apportionment calculator."""
 
 from __future__ import annotations
+
+from collections import defaultdict
+from decimal import Decimal, ROUND_HALF_UP
 from typing import TypedDict
+
+from ifta_calculator.jurisdictions import (
+    JURISDICTIONS,
+    get_name,
+    get_rate,
+    get_surcharge,
+)
+
+_CENT = Decimal("0.01")
 
 
 class JurisdictionResult(TypedDict):
-    jurisdiction: str        # two-letter code, e.g. "IL"
-    name: str                # human-readable name, e.g. "Illinois"
-    miles: float             # miles driven in this jurisdiction
-    fuel_used: float         # gallons consumed (miles / fleet_mpg)
-    tax_owed: float          # USD, rounded to cents
+    jurisdiction: str
+    name: str
+    miles: float
+    fuel_used: float
+    tax_owed: float
 
 
 def calculate(
     trips: list[dict],
     fleet_mpg: float,
 ) -> list[JurisdictionResult]:
-    """
-    Compute IFTA tax owed per jurisdiction.
+    """Compute IFTA tax owed per jurisdiction from a list of trip records."""
+    if fleet_mpg <= 0:
+        raise ValueError(f"fleet_mpg must be positive, got {fleet_mpg}")
 
-    Parameters
-    ----------
-    trips : list[dict]
-        Rows loaded from the trips CSV. Each dict has at minimum:
-            jurisdiction (str), miles (float or int).
-    fleet_mpg : float
-        Fleet average miles per gallon. Used to compute fuel consumed
-        in each jurisdiction.
+    miles_by_jurisdiction: dict[str, float] = defaultdict(float)
+    for trip in trips:
+        code = trip["jurisdiction"].upper()
+        if code not in JURISDICTIONS:
+            raise ValueError(
+                f"Jurisdiction code {code!r} is not in the rate table. "
+                f"Known codes: {sorted(JURISDICTIONS)}"
+            )
+        miles_by_jurisdiction[code] += float(trip["miles"])
 
-    Returns
-    -------
-    list[JurisdictionResult]
-        One entry per jurisdiction, sorted by jurisdiction code.
-    """
-    raise NotImplementedError("TODO: implement calculate()")
+    results: list[JurisdictionResult] = []
+    for code in sorted(miles_by_jurisdiction):
+        miles = miles_by_jurisdiction[code]
+        fuel_used = miles / fleet_mpg
+        effective_rate = get_rate(code) + get_surcharge(code)
+        tax_decimal = Decimal(str(fuel_used)) * Decimal(str(effective_rate))
+        tax_owed = float(tax_decimal.quantize(_CENT, rounding=ROUND_HALF_UP))
+        results.append(
+            JurisdictionResult(
+                jurisdiction=code,
+                name=get_name(code),
+                miles=miles,
+                fuel_used=fuel_used,
+                tax_owed=tax_owed,
+            )
+        )
+
+    return results

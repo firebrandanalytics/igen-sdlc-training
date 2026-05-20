@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ifta-calculator"
 version = "0.1.0"
-description = "IFTA fuel-tax apportionment calculator (Hour 7 exercise)"
+description = "IFTA fuel-tax apportionment calculator"
 requires-python = ">=3.10"
 dependencies = []
 
